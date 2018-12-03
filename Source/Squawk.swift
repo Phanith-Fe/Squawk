@@ -16,7 +16,7 @@ public class Squawk {
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(Squawk.onOrientation(notification:)),
-            name: .UIDeviceOrientationDidChange,
+            name: UIDevice.orientationDidChangeNotification,
             object: nil
         )
     }
@@ -44,7 +44,7 @@ public class Squawk {
         activeItem = item
 
         item.view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(onPan(gesture:))))
-        UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, item.configuration.text)
+        UIAccessibility.post(notification: UIAccessibility.Notification.announcement, argument: item.configuration.text)
         item.startTimer()
     }
 
